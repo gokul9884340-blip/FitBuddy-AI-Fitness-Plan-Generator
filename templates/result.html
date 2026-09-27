@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitBuddy Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body>
+<div class="container">
+  <div class="hero">
+    <h1>🏋️ Your FitBuddy Plan</h1>
+    <p>Personalized for {{ user.name }}</p>
+  </div>
+
+  <div class="card">
+    <h2>Your Details</h2>
+    <p><b>Age:</b> {{ user.age }} &nbsp; <b>Weight:</b> {{ user.weight }} kg</p>
+    <p><b>Goal:</b> {{ user.goal }} &nbsp; <b>Intensity:</b> {{ user.intensity }}</p>
+  </div>
+
+  <div class="card">
+    <h2>📅 Original 7-Day Plan</h2>
+    <div class="plan">{{ plan }}</div>
+  </div>
+
+  {% if updated_plan %}
+  <div class="card updated">
+    <h2>🔄 Updated Plan</h2>
+    <div class="plan">{{ updated_plan }}</div>
+  </div>
+  {% endif %}
+
+  <div class="card tip">
+    <h2>🥗 AI Nutrition / Recovery Tip</h2>
+    <p>{{ nutrition }}</p>
+  </div>
+
+  <div class="card">
+    <h2>💬 Give Feedback</h2>
+    <form method="post" action="/feedback/{{ user_id }}">
+      <textarea name="feedback" required placeholder="Example: Add more cardio or add yoga"></textarea>
+      <button type="submit">Update My Plan</button>
+    </form>
+  </div>
+
+  <div class="links">
+    <a href="/">← Create Another Plan</a>
+    <a href="/view-all-users">View All Users</a>
+  </div>
+</div>
+</body>
+</html>

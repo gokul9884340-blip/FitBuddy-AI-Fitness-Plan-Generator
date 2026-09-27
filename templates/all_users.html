@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitBuddy - All Users</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body>
+<div class="container wide">
+  <div class="hero">
+    <h1>👥 FitBuddy Admin Panel</h1>
+    <p>All users and their workout plans</p>
+  </div>
+
+  {% for user in users %}
+  <div class="card">
+    <h2>#{{ user.id }} - {{ user.name }}</h2>
+    <p><b>Age:</b> {{ user.age }} | <b>Weight:</b> {{ user.weight }} kg |
+       <b>Goal:</b> {{ user.goal }} | <b>Intensity:</b> {{ user.intensity }}</p>
+
+    <details>
+      <summary>Original Plan</summary>
+      <div class="plan">{{ user.original_plan }}</div>
+    </details>
+
+    <details>
+      <summary>Updated Plan</summary>
+      <div class="plan">{{ user.updated_plan }}</div>
+    </details>
+  </div>
+  {% else %}
+  <div class="card"><p>No users yet. Create a plan first.</p></div>
+  {% endfor %}
+
+  <a class="admin-link" href="/">← Back to FitBuddy</a>
+</div>
+</body>
+</html>
